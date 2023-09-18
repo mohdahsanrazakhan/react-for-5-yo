@@ -21,3 +21,5 @@
 
 - **Web Application** is like a _software program that you can use through a web browser_, just like how you use websites. It's a tool or service that helps you do things on the internet, like checking your email, shopping online, or using social media.<br>
   Unlike regular websites that mostly provide information, web applications allow you to interact with them, input data, and get specific results or perform tasks online, making them more like digital tools than just pages to read.
+
+## React Installation
