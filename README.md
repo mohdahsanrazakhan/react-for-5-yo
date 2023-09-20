@@ -135,3 +135,191 @@ MyComponent is a React functional component.<br>
 JSX is transpiled (converted) into regular JavaScript code by build tools like Babel before it's executed in the browser. This transpilation step is necessary because browsers don't understand JSX directly. The transformed JavaScript code is what actually creates and updates the DOM elements when the component is rendered.<br>
 
 Overall, JSX simplifies the process of creating and maintaining React components by allowing you to express UI structures in a familiar, HTML-like syntax while still leveraging the power of JavaScript.
+
+### What is a React Props
+
+In React, **props** is short for _properties_, and _it refers to a mechanism for passing data from a parent component to a child component_. Props are a fundamental part of React's component architecture and are _used to make components dynamic and reusable_.
+
+Here are the key points to understand about React props:
+
+- **Passing Data:** Props allow you to pass data (values or objects) from a parent component to a child component. This data can be used by the child component to customize its behavior or render dynamic content.
+
+- **Immutable:** _Props are immutable_, which **means** that the _child component receiving props cannot modify them_. They are _read-only, ensuring that data flows in one direction, from parent to child_.
+
+- **Functional and Class Components:** Props can be used with both functional components (using function arguments) and class components (accessed via this.props).
+
+- **Accessing Props:** In a **functional component**, you can _access props as arguments to the component function_. In a **class component**, you _access props using `this.props`_.
+
+- **Default Values:** You can specify default values for props, which will be used if the parent component doesn't provide a value for a particular prop.
+
+- **Dynamic Rendering:** Props enable dynamic rendering by allowing you to conditionally render content based on the values of props.
+
+Here's a simple example of how props work in React:
+
+```javascript
+// ParentComponent.js
+import React from "react";
+import ChildComponent from "./ChildComponent";
+
+function ParentComponent() {
+  const name = "Alice";
+
+  return (
+    <>
+      <h1>Parent Component</h1>
+      <ChildComponent name={name} />
+    </>
+  );
+}
+
+export default ParentComponent;
+```
+
+```javascript
+// ChildComponent.js
+import React from "react";
+
+function ChildComponent(props) {
+  return <p>Hello, {props.name}!</p>;
+}
+
+export default ChildComponent;
+```
+
+In this example:
+
+- `name` is a prop passed from ParentComponent to ChildComponent.
+- In ChildComponent, `{props.name}` is used to access and render the value of the name prop.
+
+By using props, you can _create reusable components_ that can be configured differently when used in various parts of your application. _Props are essential for building dynamic and data-driven user interfaces in React_.
+
+### What is React State
+
+In React, **state** is a _JavaScript object_ used _to store and manage data that can change over time and affect a component's behavior and rendering_. Each React component can have its own state, which is used to keep track of information that should be reactive to user interactions, data fetching, or other dynamic changes.
+
+Key points about React state:
+
+- **Component-Specific:** _State is local to a component_. Each instance of a component maintains its own state, making it independent of other instances of the same component.
+
+- **Initialization:** State is typically _initialized in a component's constructor or by using a React Hook (in functional components)_. For **class components**, you _set the initial state using `this.state` in the constructor_. In **functional components**, you use the _useState Hook to initialize state_.
+
+- **Updating State:** State can be _updated using the setState method_ in class components or by calling the state updater function returned by the useState Hook in functional components. _React automatically re-renders the component when state is updated_.
+
+- **Immutable:** State should be treated as immutable. You should _not directly modify state_; instead, _use setState (for class components)_ or provide a _new state object (for functional components)_ when updating state.
+
+- **Asynchronous Updates:** State updates are asynchronous in React. This means that _React batches multiple state updates together for performance reasons_. If you need to perform actions after a state update, _use a callback function provided to setState or the useState Hook_.
+
+- **Local Scope:** State is _accessible only within the component where it is defined_. It cannot be directly accessed or modified by parent or sibling components. _If you need to share state between components, you can lift the state up to a **common ancestor component** and pass it down as props_.
+
+**Rendering Based on State:** React components typically render based on the values stored in their state. _When state changes, the component automatically re-renders to reflect those changes in the user interface_.
+
+Here's a simple example of how state is used in a React **class component**:
+
+```javascript
+import React, { Component } from "react";
+
+class Counter extends Component {
+  constructor(props) {
+    super(props);
+    this.state = {
+      count: 0,
+    };
+  }
+
+  incrementCount = () => {
+    this.setState({ count: this.state.count + 1 });
+  };
+
+  render() {
+    return (
+      <div>
+        <p>Count: {this.state.count}</p>
+        <button onClick={this.incrementCount}>Increment</button>
+      </div>
+    );
+  }
+}
+
+export default Counter;
+```
+
+In this example, the `count` variable is stored in the component's state. When the **Increment** button is clicked, the `incrementCount` method is called, which updates the `count` state, causing the component to re-render with the new count value. State allows you to create interactive and dynamic user interfaces in React applications.
+
+Certainly! Here's the same counter example using a **functional component** and the _useState Hook_ in React:
+
+```javascript
+import React, { useState } from "react";
+
+function Counter() {
+  const [count, setCount] = useState(0);
+
+  const incrementCount = () => {
+    setCount(count + 1);
+  };
+
+  return (
+    <div>
+      <p>Count: {count}</p>
+      <button onClick={incrementCount}>Increment</button>
+    </div>
+  );
+}
+
+export default Counter;
+```
+
+In this functional component:
+
+- We import `useState` from the **\*react** library\* to manage the component's state.
+- Inside the `Counter` component, we use the `useState` Hook to declare the `count` state variable and its corresponding updater function, `setCount`. We initialize `count` to `0`.
+- When the **Increment** button is clicked, the `incrementCount` function is called, which updates the `count` state using `setCount`, just like `setState` in class components.
+- The component renders the `count` value and the **Increment** button, and it automatically re-renders whenever `count` changes.
+
+Functional components with Hooks offer a more concise and modern way to manage state in React applications.
+
+### What is a React Events
+
+In React, events refer to actions or interactions that occur in the user interface, such as clicking a button, typing in an input field, or moving the mouse. React allows you to handle these events by attaching event listeners to elements in your components, just like you would in traditional web development.
+
+Here are the key points to understand about React events:
+
+- **Event Handling:** React components can _define event handlers_, which _are JavaScript functions that get executed in response to specific events_. For example, you can define an `onClick` event handler to handle a button click.
+
+- **Event Attributes:** In JSX, you can _attach event handlers to elements using special attributes named after the event_, such as `onClick`, `onMouseOver`, `onChange`, etc. These attributes take a _reference to a function that will be called when the event occurs_.
+
+- **Event Object:** React passes an event object as the first argument to event handler functions. This _object contains information about the event_, such as the _target element, mouse coordinates, key codes, and more_.
+
+- **Binding Event Handlers:** When defining event handlers in **class components**, you often _need to manually bind them to the component instance using `.bind()` or arrow functions_. In **functional components**, this is _not necessary when using the function syntax_.
+
+- **Event Propagation:** React follows the same event propagation model as the browser's native events. Events bubble up from child to parent components, and you can stop propagation or prevent the default behavior of events as needed.
+
+- **Synthetic Events:** React provides a _synthetic event system that normalizes browser-specific event behavior_, ensuring consistent behavior across different browsers.
+
+Here's an example of handling a click event in a React component:
+
+```javascript
+import React from "react";
+
+function MyComponent() {
+  const handleClick = (event) => {
+    alert("Button clicked!");
+    // You can access event properties like event.target, event.clientX, etc.
+  };
+
+  return (
+    <div>
+      <button onClick={handleClick}>Click me</button>
+    </div>
+  );
+}
+
+export default MyComponent;
+```
+
+In this example:
+
+- We define a `handleClick` function to be executed when the button is clicked.
+- We attach the `handleClick` function to the button's `onClick` event attribute.
+  When the button is clicked, the `handleClick` function is called, and it shows an alert.
+
+React events provide a way to create interactive and responsive user interfaces by allowing you to respond to user interactions with your application.
