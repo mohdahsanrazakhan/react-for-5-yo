@@ -86,7 +86,7 @@ npm install
 npm run dev
 ```
 
-## What is a React Components
+## React Components
 
 A React component is _a reusable, self-contained building block_ of a user interface in a React application. It represents _a part of the UI that can have its own logic, state, and rendering behavior_.<br>
 React components are at the core of building web interfaces with React, and they can range from simple, isolated elements like buttons or form inputs to complex, nested structures like entire sections of a webpage.
@@ -115,7 +115,7 @@ React components are at the core of building web interfaces with React, and they
 
 - **Custom Components:** In addition to using built-in HTML elements like `div` and `span`, you can create custom components to represent parts of your UI that have specific functionality or styling.
 
-## What is a React JSX
+## React JSX
 
 JSX, which stands for **JavaScript XML**, is _a syntax extension for JavaScript_ often used with React. JSX _allows you to write HTML-like code within your JavaScript code_, making it easier to describe the structure and content of your user interfaces.
 
@@ -152,7 +152,7 @@ JSX is transpiled (converted) into regular JavaScript code by build tools like B
 
 Overall, JSX simplifies the process of creating and maintaining React components by allowing you to express UI structures in a familiar, HTML-like syntax while still leveraging the power of JavaScript.
 
-## What is a React Props
+## React Props
 
 In React, **props** is short for _properties_, and _it refers to a mechanism for passing data from a parent component to a child component_. Props are a fundamental part of React's component architecture and are _used to make components dynamic and reusable_.
 
@@ -209,7 +209,7 @@ In this example:
 
 By using props, you can _create reusable components_ that can be configured differently when used in various parts of your application. _Props are essential for building dynamic and data-driven user interfaces in React_.
 
-## What is React State
+## React State
 
 In React, **state** is a _JavaScript object_ used _to store and manage data that can change over time and affect a component's behavior and rendering_. Each React component can have its own state, which is used to keep track of information that should be reactive to user interactions, data fetching, or other dynamic changes.
 
@@ -293,7 +293,7 @@ In this functional component:
 
 Functional components with Hooks offer a more concise and modern way to manage state in React applications.
 
-## What is a React Events
+## React Events
 
 In React, events refer to actions or interactions that occur in the user interface, such as clicking a button, typing in an input field, or moving the mouse. React allows you to handle these events by attaching event listeners to elements in your components, just like you would in traditional web development.
 
@@ -339,3 +339,271 @@ In this example:
   When the button is clicked, the `handleClick` function is called, and it shows an alert.
 
 React events provide a way to create interactive and responsive user interfaces by allowing you to respond to user interactions with your application.
+
+## Styling in React
+
+Styling refers to _the process of defining how your components and their elements should appear visually_. Styling in React can be accomplished using various approaches and techniques, and it plays a crucial role in determining the look and feel of your user interface.
+
+### Here are some common ways to apply styling in React:
+
+- **Inline Styles:** You can use the `style` attribute in JSX to apply inline CSS styles directly to individual elements. Inline styles are _defined as JavaScript objects where property names are **camelCased** versions of CSS property names_.
+
+```jsx
+const buttonStyle = {
+  backgroundColor: "blue",
+  color: "white",
+  padding: "10px",
+};
+
+function MyComponent() {
+  return <button style={buttonStyle}>Click me</button>;
+}
+```
+
+- **CSS Modules:** CSS Modules are a way to _locally scope CSS styles_ by _importing CSS files into your JavaScript_ or TypeScript components. This approach prevents style conflicts and makes it easier to maintain styles for specific components.
+
+```jsx
+import styles from "./MyComponent.module.css";
+
+function MyComponent() {
+  return <button className={styles.button}>Click me</button>;
+}
+```
+
+- **Styled-Components:** Styled-components is a popular library that allows you to _define component-specific styles using tagged template literals_. It encourages writing CSS directly within your JavaScript code.
+
+```jsx
+import styled from "styled-components";
+
+const Button = styled.button`
+  background-color: blue;
+  color: white;
+  padding: 10px;
+`;
+
+function MyComponent() {
+  return <Button>Click me</Button>;
+}
+```
+
+- **CSS-in-JS Libraries:** Other CSS-in-JS libraries, such as **Emotion** and **JSS**, _provide similar functionality to styled-components_, allowing you to _write CSS styles as JavaScript code_.
+
+- **External CSS:** You can also use traditional external CSS files to define styles and then include them in your React application's HTML file. This approach is similar to standard web development.
+
+- **CSS Preprocessors:** You can use CSS preprocessors like **Sass** or **Less** to _write more structured and maintainable styles_ and then compile them to regular CSS.
+
+- **CSS Frameworks:** Many CSS frameworks, such as **Tailwind CSS**, **Bootstrap** and **Material-UI**, offer _pre-designed components and styles_ that you can incorporate into your React application.
+
+The _choice of styling method depends_ on your project's requirements, team preferences, and your familiarity with different approaches. _React provides flexibility in how you apply styles_, allowing you to _choose the best approach for your specific use case_.
+
+## React Conditional Rendering
+
+Conditional rendering in React refers to _the ability to render different content or components based on certain conditions or criteria_. It allows you to control what is displayed in your user interface dynamically, depending on factors such as user input, the state of your application, or external data.
+
+### Here are common techniques for conditional rendering in React:
+
+**Using JavaScript Conditional Statements:**
+
+You can use _standard JavaScript conditional statements_ like `if`, `else if`, and `else` within your JSX to conditionally render components or content. For example:
+
+```jsx
+function MyComponent(props) {
+  if (props.isLoggedIn) {
+    return <p>Welcome, user!</p>;
+  } else {
+    return <p>Please log in to continue.</p>;
+  }
+}
+```
+
+**Ternary Operator:**
+
+The ternary operator (`condition ? trueValue : falseValue`) is a concise way to conditionally render content. It's often used for simple conditional rendering:
+
+```jsx
+function MyComponent(props) {
+  return (
+    <div>
+      {props.isLoggedIn ? (
+        <p>Welcome, user!</p>
+      ) : (
+        <p>Please log in to continue.</p>
+      )}
+    </div>
+  );
+}
+```
+
+**Logical && Operator:**
+
+You can use the `&&` operator to conditionally render content. When the expression on the left is truthy, the component on the right is rendered:
+
+```jsx
+function MyComponent(props) {
+  return <div>{props.isLoggedIn && <p>Welcome, user!</p>}</div>;
+}
+```
+
+**Switch Statements:**
+
+For more complex conditional rendering scenarios, you can use `switch` statements in combination with functions or components:
+
+```jsx
+function renderContent(selectedTab) {
+  switch (selectedTab) {
+    case "tab1":
+      return <Tab1Content />;
+    case "tab2":
+      return <Tab2Content />;
+    default:
+      return <DefaultContent />;
+  }
+}
+```
+
+**Mapping Over Data:**
+
+When rendering lists of items, you can use `.map()` to conditionally render each item based on its properties or state.
+
+```jsx
+function renderItems(items) {
+  return items.map((item) => (
+    <div key={item.id}>{item.isVisible && <p>{item.name}</p>}</div>
+  ));
+}
+```
+
+_Conditional rendering is essential for building **dynamic** and **interactive** user interfaces in React_. It allows you to respond to user interactions and application state changes by showing or hiding specific content as needed.
+
+## React Hooks
+
+React Hooks are **functions** that let you **_hook into_** _React state and lifecycle features from functional components_. They were introduced in _React 16.8_ to allow functional components to manage local component state, perform side effects, and access other React features without needing to write a class component.
+
+Hooks provide a more direct API to the React concepts you already know and love, such as state, lifecycle, context, refs, and more. Below are some of the most commonly used React Hooks with elaborations:
+
+## useState Hook in React
+
+`useState` is one of the most commonly used React Hooks, and it _allows functional components to manage local component state_. It was introduced in React 16.8 to provide state management capabilities to functional components, which previously could not manage state without using class components.
+
+In simple words, the useState hook in React is like a magical container that holds and manages a piece of information, _typically a variable_, for your website or app. Imagine you have a counter on your webpage, and you want to keep track of its value. You can use useState to create and manage that counter.
+
+### Here's how `useState` works:
+
+- **Importing `useState`:** To use the `useState` Hook, you need to import it from the **react** library.
+
+```javascript
+import React, { useState } from "react";
+```
+
+- **Declaring State:** Inside your functional component, you can declare state variables using the `useState` Hook. It takes one argument, which is the initial state value.
+
+```javascript
+const [state, setState] = useState(initialState);
+```
+
+- **`state`:** This **variable** holds the current state value.
+- **`setState`:** This is a function that allows you to update the state.
+
+- **Example Usage:**
+
+```javascript
+import React, { useState } from "react";
+
+function Counter() {
+  // Declare a state variable 'count' with an initial value of 0
+  const [count, setCount] = useState(0);
+
+  // Event handler to increment 'count'
+  const increment = () => {
+    setCount(count + 1); // Update the state using setCount
+  };
+
+  return (
+    <div>
+      <p>Count: {count}</p>
+      <button onClick={increment}>Increment</button>
+    </div>
+  );
+}
+```
+
+In this example, `useState` is used to manage the count state variable. Initially, `count` is set to `0`. When the **Increment** button is clicked, the `increment` function is called, and it uses `setCount` to update the `count` state. React will then re-render the component with the updated state.
+
+The `useState` Hook is an essential tool for managing component-specific state in functional components. You can use it to manage multiple state variables in a single component, and each state variable is independent of the others.
+
+## useEffect Hook in React
+
+`useEffect` is a React Hook that enables you to perform side effects in functional components. _Side effects can include data fetching, interacting with the DOM, setting up subscriptions, and more_. `useEffect` is a critical tool for handling tasks that would typically be performed in lifecycle methods of class components.
+
+### Here's an overview of how `useEffect` works and its key concepts:
+
+- **Importing `useEffect`:** To use the `useEffect` Hook, you need to import it from the 'react' library.
+
+```javascript
+import React, { useEffect } from "react";
+```
+
+- **Declaring Side Effects:** You can _declare side effects by passing a function to `useEffect`_. This function will be executed after the component renders and the DOM is updated.
+
+```javascript
+useEffect(() => {
+  // Perform side effects here
+});
+```
+
+- **Dependencies Array:** You can also provide a _second argument_ to useEffect, which is an **_array of dependencies_**. This array specifies values (usually props or state variables) that the effect depends on. _The effect will only be re-run if one of these dependencies changes between renders_.
+
+```javascript
+useEffect(() => {
+  // Perform side effects that depend on specific props or state
+}, [dependency1, dependency2]);
+```
+
+- **Cleanup:** If your effect **returns** a function, _React will treat it as a cleanup function_. This _function will be executed when the component is_ **unmounted** or _before the effect runs again_. This is useful for cleaning up resources such as subscriptions or event listeners.
+
+```javascript
+useEffect(() => {
+  // Perform side effects here
+
+  // Cleanup function
+  return () => {
+    // Clean up any resources
+  };
+});
+
+// Note: The cleanup function won't run on the initial render.
+```
+
+### Here are some common use cases for `useEffect`:
+
+- **Data Fetching:** You can use `useEffect` to _fetch data from an API_ and update the component's state with the fetched data.
+
+- **DOM Manipulation:** Perform DOM operations like focusing an input field or updating the document title based on component state.
+
+- **Subscriptions:** Set up and tear down subscriptions to external data sources (e.g., web sockets) when the component **mounts** and **unmounts**.
+
+- **Timers and Intervals:** Start and stop timers or intervals for animations or periodic data updates.
+
+Here's an example that demonstrates fetching data with `useEffect`:
+
+```javascript
+import React, { useState, useEffect } from "react";
+
+function DataFetchingExample() {
+  const [data, setData] = useState(null);
+
+  useEffect(() => {
+    // Fetch data from an API
+    fetch("https://api.example.com/data")
+      .then((response) => response.json())
+      .then((result) => {
+        // Update the state with the fetched data
+        setData(result);
+      });
+  }, []); // Empty dependency array means the effect runs once on mount
+
+  return <div>{data ? <p>Data: {data}</p> : <p>Loading...</p>}</div>;
+}
+```
+
+In this example, the `useEffect` Hook fetches data when the component mounts (because the dependency array is empty), and the fetched data is stored in the component's state. This is a common pattern for data fetching with `useEffect`.
